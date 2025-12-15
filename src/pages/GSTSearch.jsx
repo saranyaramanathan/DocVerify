@@ -33,47 +33,37 @@ const GSTSearch = () => {
 
 if (data && data.status === "success" && data.data) {
     
-    const responseData = data.data; // Get the nested 'data' object
-
-    // Helper to safely extract State Name from the 'stj' string
+    const responseData = data.data; 
     const getStateName = (stjString) => {
         const match = stjString.match(/State - (.*?),/);
         return match ? match[1].trim() : 'N/A';
     };
 
     setResults({
-        // Direct Mapping
+        
         gstin: responseData.gstin || gstToSearch.toUpperCase(),
         legal_name: responseData.lgnm || 'N/A',
         trade_name: responseData.tradeNam || 'N/A',
         registration_date: responseData.rgdt || 'N/A',
         status: responseData.sts || 'N/A',
         business_type: responseData.ctb || 'N/A',
-
-        // Mapped & Extracted Fields
-        state: getStateName(responseData.stj || ''), // Extract state name from the full string
-        
-        // Nested Field
-        principal_place: responseData.pradr?.adr || 'N/A', // Use optional chaining for safety
-
-        // Calculated/Defaulted Fields (Keys not present in API data)
-        // If adadr is an array of additional addresses, count them. If it's just a string/null, default to '0'.
+        state: getStateName(responseData.stj || ''), 
+        principal_place: responseData.pradr?.adr || 'N/A', 
         additional_places: responseData.adadr ? "Yes" : "No", 
-        last_return_filed: 'N/A (Data Not Available)', // Removed since the API data doesn't provide it
+      
     });
     
     toast.success("GST details retrieved successfully!");
 
 } else if (data && data.status === "error") {
-    // Handle API error status (if the API uses "error" in the status field)
     setError(data.message || "GST details not found.");
     toast.error(`Search failed: ${data.message || "Unknown error"}`);
 } else {
-    // Handle generic failure
+  
     setError("GST details not found or API returned an unexpected response.");
     toast.error("GST details not found or API error.");
 }
-        //setResults(data);
+  
       } catch (err) {
         if (axios.isCancel(err)) {
           console.log("Request canceled", err.message);
@@ -99,19 +89,19 @@ if (data && data.status === "success" && data.data) {
 
     // Simulating API call
     setTimeout(() => {
-      searchByGST();
-      // setResults({
-      //   gstin: gstNumber.toUpperCase(),
-      //   legal_name: "ABC Technologies Pvt. Ltd.",
-      //   trade_name: "ABC Tech Solutions",
-      //   registration_date: "01-07-2017",
-      //   status: "Active",
-      //   state: "Maharashtra",
-      //   business_type: "Private Limited Company",
-      //   principal_place: "Mumbai, Maharashtra - 400001",
-      //   additional_places: "2",
-      //   last_return_filed: "December 2023",
-      // });
+  //    searchByGST();
+      setResults({
+        gstin: gstNumber.toUpperCase(),
+        legal_name: "ABC Technologies Pvt. Ltd.",
+        trade_name: "ABC Tech Solutions",
+        registration_date: "01-07-2017",
+        status: "Active",
+        state: "Maharashtra",
+        business_type: "Private Limited Company",
+        principal_place: "Mumbai, Maharashtra - 400001",
+        additional_places: "2",
+        last_return_filed: "December 2023",
+      });
       setLoading(false);
       toast.success("GST details retrieved successfully!");
     }, 1500);
