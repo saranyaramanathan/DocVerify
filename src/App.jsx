@@ -25,8 +25,9 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<GSTSearch />} />
-            <Route path="pan-search" element={<PANSearch />} />
             <Route path="gst-search" element={<GSTSearch />} />
+            <Route path="pan-search" element={<PANSearch />} />
+            
             <Route path="bank-statement" element={<BankStatement />} />
           </Route>
           <Route path="*" element={<NotFound />} />

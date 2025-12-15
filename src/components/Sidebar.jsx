@@ -4,17 +4,18 @@ import { CreditCard, FileText, Building2, Menu, X, Search } from "lucide-react";
 import { cn } from "../lib/utils";
 
 const navItems = [
-  {
-    title: "PAN Search",
-    path: "/pan-search",
-    icon: CreditCard,
-    description: "Search & verify PAN details",
-  },
+
   {
     title: "GST Search",
     path: "/gst-search",
     icon: Building2,
     description: "Lookup GST information",
+  },
+    {
+    title: "PAN Search",
+    path: "/pan-search",
+    icon: CreditCard,
+    description: "Search & verify PAN details",
   },
   {
     title: "Bank Statement",
