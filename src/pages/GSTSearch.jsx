@@ -5,7 +5,7 @@ import ImageUploader from "../components/ImageUploader";
 import ResultsDisplay from "../components/ResultsDisplay";
 import { toast } from "sonner";
 import axios from "axios";
-const API_KEY = "59ADFAF5-6DA3-477A-B8A7-BD0763870594BB4C9526-8EBD-47D5-9C64-50C36138D691C4484B7E-65B9-43AB-8F82-5B97E375AE4D"
+const API_KEY = "C4484B7E-65B9-43AB-8F82-5B97E375AE4D"
 const GSTSearch = () => {
   const [gstNumber, setGstNumber] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ const GSTSearch = () => {
  const searchByGST = async () => {
       try {
        const { data } = await axios.post(
-          "https://sandbox.vlinknow.com//api/SearchByGST",
+          "https://sandbox.vlinknow.com//api/SearchByGst",
           {
             GstNumber:"37AGIPR4537M1ZQ"
           },
