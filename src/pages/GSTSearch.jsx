@@ -5,7 +5,7 @@ import ImageUploader from "../components/ImageUploader";
 import ResultsDisplay from "../components/ResultsDisplay";
 import { toast } from "sonner";
 import axios from "axios";
-const API_KEY = "2129F2BE-E3C3-41F1-A278-63F58CE693FA"
+const API_KEY = "59ADFAF5-6DA3-477A-B8A7-BD0763870594BB4C9526-8EBD-47D5-9C64-50C36138D691C4484B7E-65B9-43AB-8F82-5B97E375AE4D"
 const GSTSearch = () => {
   const [gstNumber, setGstNumber] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ const GSTSearch = () => {
  const searchByGST = async () => {
       try {
        const { data } = await axios.post(
-          "https://gapi.vlinknow.com//api/SearchByGST",
+          "https://sandbox.vlinknow.com//api/SearchByGST",
           {
             GstNumber:"37AGIPR4537M1ZQ"
           },
@@ -89,19 +89,19 @@ if (data && data.status === "success" && data.data) {
 
     // Simulating API call
     setTimeout(() => {
-  //    searchByGST();
-      setResults({
-        gstin: gstNumber.toUpperCase(),
-        legal_name: "ABC Technologies Pvt. Ltd.",
-        trade_name: "ABC Tech Solutions",
-        registration_date: "01-07-2017",
-        status: "Active",
-        state: "Maharashtra",
-        business_type: "Private Limited Company",
-        principal_place: "Mumbai, Maharashtra - 400001",
-        additional_places: "2",
-        last_return_filed: "December 2023",
-      });
+      searchByGST();
+      // setResults({
+      //   gstin: gstNumber.toUpperCase(),
+      //   legal_name: "ABC Technologies Pvt. Ltd.",
+      //   trade_name: "ABC Tech Solutions",
+      //   registration_date: "01-07-2017",
+      //   status: "Active",
+      //   state: "Maharashtra",
+      //   business_type: "Private Limited Company",
+      //   principal_place: "Mumbai, Maharashtra - 400001",
+      //   additional_places: "2",
+      //   last_return_filed: "December 2023",
+      // });
       setLoading(false);
       toast.success("GST details retrieved successfully!");
     }, 1500);
