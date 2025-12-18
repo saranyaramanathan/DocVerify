@@ -19,7 +19,7 @@ const GSTSearch = () => {
  const searchByGST = async () => {
       try {
        const { data } = await axios.post(
-          "https://sandbox.vlinknow.com//api/SearchByPAN",
+          "/vlink-api/api/SearchByPAN",
           {
             //GstNumber:"37AGIPR4537M1ZQ"
             "PanNumber": "AISPI5131Q"
