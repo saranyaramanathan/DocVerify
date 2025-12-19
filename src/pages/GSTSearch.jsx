@@ -31,7 +31,7 @@ const GSTSearch = () => {
         );
         console.log("test data...",data)
         // Inside searchByGST, after a successful axios.post call:
-if(data && data.status === "success" && data === null){
+if(data && data.status === "success" && data.data === null){
   setError(data.message || "Invalid GST")
 } 
 else if (data && data.status === "success" && data.data !=null) {
@@ -44,7 +44,7 @@ else if (data && data.status === "success" && data.data !=null) {
 
     setResults({
         
-        gstin: responseData.gstin || gstToSearch.toUpperCase(),
+        gstin: responseData.gstin || gstNumber.toUpperCase(),
         legal_name: responseData.lgnm || 'N/A',
         trade_name: responseData.tradeNam || 'N/A',
         registration_date: responseData.rgdt || 'N/A',

@@ -37,8 +37,8 @@ try {
       { PanNumber: panNumber.toUpperCase() },
       { headers: { "x-api-key": API_KEY, "Content-Type": "application/json" } }
     );
-
-    if (panResponse.data?.status === "success" && data.data != null) {
+    console.log('test results',panResponse.data.data!=null)
+    if (panResponse.data?.status === "success" && panResponse.data.data != null) {
       const gstinList = panResponse.data.data.GstinResList; // The array of GSTs
       const panNum = panResponse.data.data.PanNum;
 
