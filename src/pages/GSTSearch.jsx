@@ -31,8 +31,10 @@ const GSTSearch = () => {
         );
         console.log("test data...",data)
         // Inside searchByGST, after a successful axios.post call:
-
-if (data && data.status === "success" && data.data) {
+if(data && data.status === "success" && data === null){
+  setError(data.message || "Invalid GST")
+} 
+else if (data && data.status === "success" && data.data !=null) {
     
     const responseData = data.data; 
     const getStateName = (stjString) => {
@@ -56,9 +58,7 @@ if (data && data.status === "success" && data.data) {
     
     toast.success("GST details retrieved successfully!");
 
-}else if(data && data.status === "success" && data === null){
-  setError(data.message || "Invalid GST")
-} 
+}
 else if (data && data.status === "error") {
     setError(data.message || "GST details not found.");
     toast.error(`Search failed: ${data.message || "Unknown error"}`);

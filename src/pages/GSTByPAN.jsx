@@ -38,7 +38,7 @@ try {
       { headers: { "x-api-key": API_KEY, "Content-Type": "application/json" } }
     );
 
-    if (panResponse.data?.status === "success" && data.data) {
+    if (panResponse.data?.status === "success" && data.data != null) {
       const gstinList = panResponse.data.data.GstinResList; // The array of GSTs
       const panNum = panResponse.data.data.PanNum;
 
@@ -84,7 +84,7 @@ try {
     }
   } catch (err) {
     console.error("PAN Search Error:", err);
-    setError("Failed to fetch data for this PAN");
+    setError("Invalid PAN");
     setLoading(false);
     toast.error("Error connecting to API");
   } 
