@@ -77,7 +77,7 @@ try {
         total_gst_linked: gstinList.length,
         gst_details: formattedGstDetails,
       });
-
+      setLoading(false);
       toast.success(`Found ${gstinList.length} GST registration(s)`);
     } else {
       toast.error("No data found for this PAN");
