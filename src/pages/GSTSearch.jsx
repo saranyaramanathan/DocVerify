@@ -56,7 +56,10 @@ if (data && data.status === "success" && data.data) {
     
     toast.success("GST details retrieved successfully!");
 
-} else if (data && data.status === "error") {
+}else if(data && data.status === "success" && data === null){
+  setError(data.message || "Invalid GST")
+} 
+else if (data && data.status === "error") {
     setError(data.message || "GST details not found.");
     toast.error(`Search failed: ${data.message || "Unknown error"}`);
 } else {
