@@ -38,7 +38,7 @@ try {
       { headers: { "x-api-key": API_KEY, "Content-Type": "application/json" } }
     );
 
-    if (panResponse.data?.status === "success") {
+    if (panResponse.data?.status === "success" && data.data) {
       const gstinList = panResponse.data.data.GstinResList; // The array of GSTs
       const panNum = panResponse.data.data.PanNum;
 
