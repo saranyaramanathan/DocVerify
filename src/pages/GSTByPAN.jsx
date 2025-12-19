@@ -37,12 +37,24 @@ try {
       { PanNumber: panNumber.toUpperCase() },
       { headers: { "x-api-key": API_KEY, "Content-Type": "application/json" } }
     );
-    console.log('test results',panResponse.data.data!=null)
+    
     if (panResponse.data?.status === "success" && panResponse.data.data != null) {
-      const gstinList = panResponse.data.data.GstinResList; // The array of GSTs
-      const panNum = panResponse.data.data.PanNum;
+      
+    const gstinList = panData.GstinResList || []; 
+      const panNum = panData.PanNum || panNumber;
 
-      // STEP 2: Create a list of promises to fetch details for EVERY GSTIN found
+      
+      if (gstinList.length === 0) {
+        setResults({
+          pan_number: panNum.toUpperCase(),
+          total_gst_linked: 0,
+          gst_details: [], 
+        });
+        toast.info("This PAN is valid but has no linked GST registrations.");
+        setLoading(false);
+        return;
+      }
+      
       const detailsPromises = gstinList.map((item) => 
         axios.post(
           "/vlink-api/SearchByGst",
@@ -51,14 +63,14 @@ try {
         )
       );
 
-      // STEP 3: Run all GST searches in parallel
+     
       const allGstResponses = await Promise.all(detailsPromises);
 
-      // STEP 4: Format and map the data into your required structure
+      
       const formattedGstDetails = allGstResponses.map((res) => {
-        const d = res.data.data; // The actual business data from SearchByGST
+        const d = res.data.data; 
         
-        // Helper to extract state name (same as before)
+     
         const stateName = d.stj?.match(/State - (.*?),/)?.[1] || "N/A";
 
         return {
@@ -71,7 +83,6 @@ try {
         };
       });
 
-      // STEP 5: Update the final state
       setResults({
         pan_number: panNum.toUpperCase(),
         total_gst_linked: gstinList.length,

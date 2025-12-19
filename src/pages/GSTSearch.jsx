@@ -29,20 +29,23 @@ const GSTSearch = () => {
             
           }
         );
-        console.log("test data...",data.data.message)
-        // Inside searchByGST, after a successful axios.post call:
-if(data && data.status === "success" && data.data === null){
-  setError(data.data.message || "Invalid GST")
-} 
-else if (data && data.status === "success" && data.data !=null) {
+       
+if (data && data.status === "success") {
     
+  if (!data.data || Object.keys(data.data).length === 0) {
+        setError("GST number not found in records.");
+        setResults(null);
+        toast.error("No records found for this GSTIN.");
+        return; // Exit early
+    }
+
     const responseData = data.data; 
     const getStateName = (stjString) => {
         const match = stjString.match(/State - (.*?),/);
         return match ? match[1].trim() : 'N/A';
     };
-    if(responseData != null)
-   { setResults({
+   
+     setResults({
         
         gstin: responseData.gstin || gstNumber.toUpperCase(),
         legal_name: responseData.lgnm || 'N/A',
@@ -56,8 +59,15 @@ else if (data && data.status === "success" && data.data !=null) {
       
     });
     
-    toast.success("GST details retrieved successfully!");}
+    //toast.success("GST details retrieved successfully!");
+    
 
+}else if (data && (data.status === "error" || data.status === "fail")) {
+    
+    const errorMsg = data.message || "Invalid GST number provided.";
+    setError(errorMsg);
+    setResults(null);
+    toast.error(errorMsg);
 }
 else if (data && data.status === "error") {
     setError(data.message || "GST details not found.");
@@ -110,11 +120,7 @@ else if (data && data.status === "error") {
       toast.success("GST details retrieved successfully!");
     }, 1500);
   };
-//  useEffect(() => {
-//   console.log("test1")
-//       searchByGST()
-    
-//   }, []);
+
   const handleImageUpload = (file, preview) => {
     if (file) {
       toast.info("Image uploaded! Processing GST certificate...");
