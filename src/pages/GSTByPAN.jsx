@@ -39,7 +39,7 @@ try {
     );
     
     if (panResponse.data?.status === "success" && panResponse.data.data != null) {
-      
+      const panData = panResponse.data.data;
     const gstinList = panData.GstinResList || []; 
       const panNum = panData.PanNum || panNumber;
 
