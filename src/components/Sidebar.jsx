@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { CreditCard, FileText, Building2, Menu, X, Search } from "lucide-react";
 import { cn } from "../lib/utils";
-
+import { Link2 } from "lucide-react";
 const navItems = [
 
   {
@@ -11,18 +11,24 @@ const navItems = [
     icon: Building2,
     description: "Lookup GST information",
   },
-    {
-    title: "PAN Search",
-    path: "/pan-search",
-    icon: CreditCard,
-    description: "Search & verify PAN details",
+   {
+    title: "GST by PAN",
+    path: "/gst-by-pan",
+    icon: Link2,
+    description: "Find GST linked to PAN",
   },
-  {
-    title: "Bank Statement",
-    path: "/bank-statement",
-    icon: FileText,
-    description: "Upload & analyze statements",
-  },
+  //   {
+  //   title: "PAN Search",
+  //   path: "/pan-search",
+  //   icon: CreditCard,
+  //   description: "Search & verify PAN details",
+  // },
+  // {
+  //   title: "Bank Statement",
+  //   path: "/bank-statement",
+  //   icon: FileText,
+  //   description: "Upload & analyze statements",
+  // },
 ];
 
 const Sidebar = () => {
@@ -30,7 +36,7 @@ const Sidebar = () => {
   const location = useLocation();
 
   const isActive = (path) => {
-    if (path === "/pan-search" && location.pathname === "/") return true;
+    if (path === "/gst-search" && location.pathname === "/") return true;
     return location.pathname === path;
   };
 

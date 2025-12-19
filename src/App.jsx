@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import PANSearch from "./pages/PANSearch";
 import GSTSearch from "./pages/GSTSearch";
+import GSTByPAN from "./pages/GSTByPAN";
 import BankStatement from "./pages/BankStatement";
 import NotFound from "./pages/NotFound";
 import { Helmet } from "react-helmet";
@@ -27,7 +28,7 @@ const App = () => (
             <Route index element={<GSTSearch />} />
             <Route path="gst-search" element={<GSTSearch />} />
             <Route path="pan-search" element={<PANSearch />} />
-            
+            <Route path="gst-by-pan" element={<GSTByPAN />} />
             <Route path="bank-statement" element={<BankStatement />} />
           </Route>
           <Route path="*" element={<NotFound />} />
