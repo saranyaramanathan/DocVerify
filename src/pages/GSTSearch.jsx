@@ -29,10 +29,10 @@ const GSTSearch = () => {
             
           }
         );
-        console.log("test data...",data)
+        console.log("test data...",data.data.message)
         // Inside searchByGST, after a successful axios.post call:
 if(data && data.status === "success" && data.data === null){
-  setError(data.message || "Invalid GST")
+  setError(data.data.message || "Invalid GST")
 } 
 else if (data && data.status === "success" && data.data !=null) {
     
@@ -41,8 +41,8 @@ else if (data && data.status === "success" && data.data !=null) {
         const match = stjString.match(/State - (.*?),/);
         return match ? match[1].trim() : 'N/A';
     };
-
-    setResults({
+    if(responseData != null)
+   { setResults({
         
         gstin: responseData.gstin || gstNumber.toUpperCase(),
         legal_name: responseData.lgnm || 'N/A',
@@ -56,7 +56,7 @@ else if (data && data.status === "success" && data.data !=null) {
       
     });
     
-    toast.success("GST details retrieved successfully!");
+    toast.success("GST details retrieved successfully!");}
 
 }
 else if (data && data.status === "error") {

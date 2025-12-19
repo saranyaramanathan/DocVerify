@@ -81,12 +81,13 @@ try {
       toast.success(`Found ${gstinList.length} GST registration(s)`);
     } else {
       toast.error("No data found for this PAN");
+       setLoading(false);
     }
   } catch (err) {
     console.error("PAN Search Error:", err);
-    setError("Invalid PAN");
+    setError(err);
     setLoading(false);
-    toast.error("Error connecting to API");
+    //toast.error("Error connecting to API");
   } 
     // Simulating API call for GST linked with PAN
     // setTimeout(() => {
